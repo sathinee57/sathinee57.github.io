@@ -94,7 +94,10 @@
                     <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="24-set-local-storage.html">Page24</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="25-get-local-storage.html">Page25</a>
                 </li>
             </ul>
         </div>
@@ -110,6 +113,25 @@
 
                     <p class="card-text" id="output">
                     </p>
+                    <table id="emp_table" class="table table-striped table-info table-bordered" style="background: skyblue;">
+                        <thead class="bg-info">
+                        <tr>
+                            <th>รหัสพนักงาน</th>
+                            <th>ชื่อพนักงาน</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
@@ -129,14 +151,26 @@
     <script>
         let employee
         let emp = []
+        let emp_tb
+        let row
+        let cell1
+        let cell2
+
         function get_employee() {
             employee = localStorage.getItem('employee')
             emp = eval(employee)
-            // document.getElementById('output').innerHTML = employee + '<br>'
-            // document.getElementById('output').innerHTML += emp
-            //document.getElementById('output').innerHTML = emp[0]['empid']+ ' ' + emp[0]['empname']
-            for (let i of emp){
-                document.getElementById('output').innerHTML += i.empid + ' ' + i.empname + '<br>'
+            emp_tb = document.getElementById('emp_table').getElementsByTagName('tbody')[0]
+            if (emp != null) {
+                for (let i of emp){
+                    row = emp_tb.insertRow()
+                    cell1 = row.insertCell()
+                    cell2 = row.insertCell()
+                    cell1.innerHTML = i.empid
+                    cell2.innerHTML = i.empname
+                    //document.getElementById('output').innerHTML += i.empid + ' ' + i.empname + '<br>'
+                } 
+            } else {
+                document.getElementById('output').innerHTML = 'ไม่พบข้อมูลพนักงาน'
             }
         }
     </script>
